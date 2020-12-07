@@ -61,21 +61,13 @@
     }
 </style>
 
-{% if idea.description %}
 <div class="ui main text container">
+    {% if authorized %}<a href="{% url 'ideas:update' slug=idea.slug %}"><i class="icon edit"></i>Edit</a>{% endif %}
     <h1 class="ui header">{{ idea.title|title }}</h1>
 </div>
 <br><br>
 <div class="ui text container">
-<p>{{ idea.description }}</p>
+<p>{% firstof idea.description '' %}</p>
 </div>
-{% else %}
-<div class="ui main text container">
-    <h1 class="ui header">{{ idea.title|title|truncatechars:10 }}</h1>
-</div>
-<br><br>
-<div class="ui text container">
-<p>{{ idea.title|capfirst }}</p>
-</div>
-{% endif %}
+
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.utils.text import slugify
 
 class Idea(models.Model):
@@ -25,3 +26,6 @@ class Idea(models.Model):
             self.slug = slugify(self.title)
         self.validate_unique()
         return super().save(*args, **kwargs)
+    
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse('ideas:detail', kwargs={'slug': self.slug})
