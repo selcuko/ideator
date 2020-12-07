@@ -13,5 +13,7 @@ class Landing(View):
         form = IdeaInlineForm(request.POST)
         if not form.is_valid():
             return HttpResponse(form.errors, status=400)
-        idea = form.save()
+        idea = form.save(commit=False)
+        idea.session_key = request.session.session_key
+        idea.save()
         return HttpResponseRedirect(redirect_to=reverse('ideas:detail', kwargs={'slug': idea.slug}))

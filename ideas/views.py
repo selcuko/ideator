@@ -21,8 +21,10 @@ class IdeaDetail(DetailView):
     template_name = 'ideas/detail.html'
 
     def get_context_data(self, *args, **kwargs):
+        if not self.request.session.session_key: 
+            self.request.session.save()
         ctx = super().get_context_data(*args, **kwargs)
-        ctx['authorized'] = self.request.session.session_key == self.object.session_key
+        ctx['authorized'] = (self.request.session.session_key == self.object.session_key) and not bool(self.request.session.session_key)
         return ctx
 
 
@@ -31,8 +33,25 @@ class IdeaCreate(CreateView):
     form_class = IdeaForm
     template_name = 'ideas/create.html'
 
+    def form_valid(self, form):
+        if not self.request.session.session_key: 
+            self.request.session.save()
+        form.instance.session_key = self.request.session.session_key
+        return super().form_valid(form)
+
 
 class IdeaUpdate(UpdateView):
     model = Idea
     form_class = IdeaForm
     template_name = 'ideas/create.html'
+
+
+    def form_valid(self, form):
+        if not self.request.session.session_key: 
+            self.request.session.save()
+        if not (self.request.session.session_key == self.object.session_key) and not bool(self.request.session.session_key):
+            return HttpResponse(status=403)
+
+        form.instance.session_key = self.request.session.session_key
+        return super().form_valid(form)
+

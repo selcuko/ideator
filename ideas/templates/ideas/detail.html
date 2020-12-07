@@ -67,7 +67,11 @@
 </div>
 <br><br>
 <div class="ui text container">
-<p>{% firstof idea.description '' %}</p>
+    {% if idea.description %}
+    <p>{{ idea.description }}</p>
+    {% elif authorized %}
+    <p style="color: gray">Click on "Edit" to update or add details to this idea.</p>
+    {% endif %}
 </div>
 
 {% endblock %}
