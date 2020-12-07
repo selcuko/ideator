@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +25,8 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'tj(gnh(gmb7&1l09zi&ih7%qu6i%53+md&mfjv%0!m
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ON_HEROKU = os.getenv('ON_HEROKU', False)
+DATABASE_URL = os.getenv('DATABASE_URL', None)
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -83,6 +86,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+if ON_HEROKU:
+    if not DATABASE_URL: raise Exception('DATABASE_URL not supplied.')
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 
 # Password validation
