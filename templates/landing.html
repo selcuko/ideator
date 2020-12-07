@@ -3,7 +3,8 @@
 {% block js %}
 <script defer src="{% static 'js/landing.js' %}"></script>
 {% endblock %}
-{% block navbar %}<!-- overwrite -->{% endblock %}
+{% block navbar %}
+<!-- overwrite -->{% endblock %}
 {% block body %}
 
 <!-- Page Contents -->
@@ -28,7 +29,14 @@
         <div class="ui center aligned basic segment">
             <form action="" method="POST" id="idea-form">
                 {% csrf_token %}
-                <div class="ui large action input">
+                <div id="message" style="display:none;" class="ui message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        That idea already exists!
+                    </div>
+                    <p>It's interesting that you thought it too, though.</p>
+                </div>
+                <div id="idea-submit" class="ui fluid large action input">
                     {% firstof placeholder 'Your million dollar idea' as ph %}
                     {% render_field form.title placeholder=ph %}
                     <button class="ui inverted white submit button">Submit</button>
@@ -37,7 +45,7 @@
             <div class="ui horizontal inverted divider">
                 Or
             </div>
-            <a href="{% url 'ideas:idea-list' %}" class="ui large teal labeled icon button">
+            <a href="{% url 'ideas:list' %}" class="ui large teal labeled icon button">
                 Browse others' ideas
                 <i class="search icon"></i>
             </a>

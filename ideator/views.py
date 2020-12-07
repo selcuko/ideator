@@ -14,4 +14,4 @@ class Landing(View):
         if not form.is_valid():
             return HttpResponse(form.errors, status=400)
         idea = form.save()
-        return HttpResponseRedirect(redirect_to=reverse('ideas:idea-detail', kwargs={'slug': idea.slug}))
+        return HttpResponseRedirect(redirect_to=reverse('ideas:detail', kwargs={'slug': idea.slug}))

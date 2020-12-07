@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static widget_tweaks %}
+{% block body %}
+<div class="ui inverted vertical masthead center aligned segment">
+
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            <strong>Your million dollar idea</strong>
+        </h1>
+        <div class="ui center aligned basic segment">
+            <form action="" method="POST" id="idea-form">
+                {% csrf_token %}
+                <div class="ui huge input">
+                    {% firstof placeholder 'Your million dollar idea' as ph %}
+                    {% render_field form.title placeholder=ph %}
+                </div>
+                <div class="ui horizontal inverted divider">
+                    optional description
+                </div>
+                <div class="ui form input">
+                    {% firstof placeholder 'With extra sauce, please' as ph %}
+                    {% render_field form.description placeholder=ph rows=4 %}
+                </div>
+                <br>
+                <div style="margin-top:1em;" class="ui form input">
+                    <button type="submit" class="ui huge teal inverted button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

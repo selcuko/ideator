@@ -23,7 +23,7 @@
     <!-- Sidebar Menu -->
     <div class="ui vertical inverted sidebar menu">
         <a href="{% url 'landing' %}" class="{% if active == 'home' %}active {% endif %}item">Home</a>
-        <a href="{% url 'ideas:idea-list' %}" class="{% if active == 'ideas' %}active {% endif %}item">Ideas</a>
+        <a href="{% url 'ideas:list' %}" class="{% if active == 'ideas' %}active {% endif %}item">Ideas</a>
         <a class="{% if active == 'about' %}active {% endif %}item">About</a>
         <a class="{% if active == 'contact' %}active {% endif %}item">Contact</a>
         <a class="item">Submit your idea <i class="arrow right icon"></i></a>
@@ -37,7 +37,7 @@
                         <i class="sidebar icon"></i>
                     </a>
                     <a href="{% url 'landing' %}" class="{% if active == 'home' %}active {% endif %}item">Home</a>
-                    <a href="{% url 'ideas:idea-list' %}"
+                    <a href="{% url 'ideas:list' %}"
                         class="{% if active == 'ideas' %}active {% endif %}item">Ideas</a>
                     <a class="{% if active == 'about' %}active {% endif %}item">About</a>
                     <a class="{% if active == 'contact' %}active {% endif %}item">Contact</a>
@@ -53,7 +53,7 @@
                         <h4 class="ui inverted header">Quick Links</h4>
                         <div class="ui inverted link list">
                             <a href="{% url 'landing' %}" class="item">Home</a>
-                            <a href="{% url 'ideas:idea-list' %}" class="item">Ideas</a>
+                            <a href="{% url 'ideas:list' %}" class="item">Ideas</a>
                             <a href="#" class="item">About</a>
                             <a href="#" class="item">Submit your idea <i class="right arrow icon"></i></a>
                         </div>
