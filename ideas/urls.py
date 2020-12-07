@@ -3,5 +3,6 @@ from .views import *
 
 app_name = 'ideas'
 urlpatterns = [
-    path('i/', idea, name='idea-detail'),
+    path('i/<slug:slug>/', IdeaDetail.as_view(), name='idea-detail'),
+    path('ideas/', IdeaList.as_view(), name='idea-list'),
 ]
