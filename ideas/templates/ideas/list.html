@@ -11,7 +11,9 @@
             <div class="content">
               <div class="header">{{ idea.title|title }}</div>
               
+              {% if idea.description %}
               <div class="description">{{ idea.description|truncatechars:100 }}</div>
+              {% endif %}
             </div>
             <div class="extra content">
               <a class="created">Cool +1</a>

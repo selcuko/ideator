@@ -14,6 +14,7 @@ class Idea(models.Model):
     color = models.CharField(max_length=20, null=True, blank=True)
     magnitude = models.IntegerField(default=1)
     slug = models.SlugField(unique=True, editable=False)
+    session_key = models.TextField(null=True, blank=True)
 
 
     def __str__(self):
