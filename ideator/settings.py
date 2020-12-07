@@ -31,6 +31,7 @@ DATABASE_URL = os.getenv('DATABASE_URL', None)
 ALLOWED_HOSTS = [
     'localhost',
     '192.168.1.1',
+    'ideator3000.herokuapp.com',
 ]
 
 
