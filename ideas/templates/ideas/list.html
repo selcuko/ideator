@@ -1,16 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>All ideas we got</h1>
-    <ol>
-        {% for i in ideas %}
-        <li><a href="{% url 'ideas:idea-detail' slug=i.slug %}">{{ i.title }}</a></li>
-        {% endfor %}
-    </ol>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block body %}
+
+<style type="text/css">
+    body {
+        background-color: #FFFFFF;
+        padding-top: 4em;
+    }
+
+    .main.container {
+        margin-top: 2em;
+    }
+
+    .main.menu {
+        margin-top: 4em;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        transition:
+            box-shadow 0.5s ease,
+            padding 0.5s ease;
+    }
+
+    .main.menu .item img.logo {
+        margin-right: 1.5em;
+    }
+
+    .overlay {
+        float: left;
+        margin: 0em 3em 1em 0em;
+    }
+
+    .overlay .menu {
+        position: relative;
+        left: 0;
+        transition: left 0.5s ease;
+    }
+
+    .main.menu.fixed {
+        background-color: #FFFFFF;
+        border: 1px solid #DDD;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .overlay.fixed .menu {
+        left: 800px;
+    }
+
+    .text.container .left.floated.image {
+        margin: 2em 2em 2em -4em;
+    }
+
+    .text.container .right.floated.image {
+        margin: 2em -4em 2em 2em;
+    }
+
+    .ui.footer.segment {
+        margin: 5em 0em 0em;
+        padding: 5em 0em;
+    }
+</style>
+
+<div class="ui main text container">
+    <h1 class="ui header">Latest ideas</h1>
+</div>
+<br><br>
+<div class="ui text container">
+    <div class="ui cards">
+        {% for idea in ideas %}
+        <div class="ui card">
+            <div class="content">
+              <div class="header">{{ idea.title|title }}</div>
+              
+              <div class="description">{{ idea.description|truncatechars:100 }}</div>
+            </div>
+            <div class="extra content">
+              <a class="created">Cool +1</a>
+              <a href="{% url 'ideas:idea-detail' slug=idea.slug %}" class="right floated created">View details</a>
+            </div>
+          </div>
+          {% endfor %}
+    </div>
+ 
+
+</div>
+
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui stackable inverted divided grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">Group 1</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Link One</a>
+                    <a href="#" class="item">Link Two</a>
+                    <a href="#" class="item">Link Three</a>
+                    <a href="#" class="item">Link Four</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Group 2</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Link One</a>
+                    <a href="#" class="item">Link Two</a>
+                    <a href="#" class="item">Link Three</a>
+                    <a href="#" class="item">Link Four</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Group 3</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Link One</a>
+                    <a href="#" class="item">Link Two</a>
+                    <a href="#" class="item">Link Three</a>
+                    <a href="#" class="item">Link Four</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Footer Header</h4>
+                <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <img src="assets/images/logo.png" class="ui centered mini image">
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="#">Site Map</a>
+            <a class="item" href="#">Contact Us</a>
+            <a class="item" href="#">Terms and Conditions</a>
+            <a class="item" href="#">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
