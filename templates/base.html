@@ -24,9 +24,9 @@
     <div class="ui vertical inverted sidebar menu">
         <a href="{% url 'landing' %}" class="{% if active == 'home' %}active {% endif %}item">Home</a>
         <a href="{% url 'ideas:list' %}" class="{% if active == 'ideas' %}active {% endif %}item">Ideas</a>
-        <a class="{% if active == 'about' %}active {% endif %}item">About</a>
-        <a class="{% if active == 'contact' %}active {% endif %}item">Contact</a>
-        <a class="item">Submit your idea <i class="arrow right icon"></i></a>
+        <a href="{% url 'landing' %}#about" class="{% if active == 'about' %}active {% endif %}item">About</a>
+        <a href="#contact" class="{% if active == 'contact' %}active {% endif %}item">Contact</a>
+        <a href="{% url 'ideas:create' %}" class="item">Submit your idea <i class="arrow right icon"></i></a>
     </div>
     <div class="pusher">
         {% block navbar %}
@@ -54,11 +54,11 @@
                         <div class="ui inverted link list">
                             <a href="{% url 'landing' %}" class="item">Home</a>
                             <a href="{% url 'ideas:list' %}" class="item">Ideas</a>
-                            <a href="#" class="item">About</a>
-                            <a href="#" class="item">Submit your idea <i class="right arrow icon"></i></a>
+                            <a href="{% url 'landing' %}#about" class="item">About</a>
+                            <a href="{% url 'ideas:create' %}" class="item">Submit your idea <i class="right arrow icon"></i></a>
                         </div>
                     </div>
-                    <div class="six wide column">
+                    <div id="contact" class="six wide column">
                         <h4 class="ui inverted header">Ömer Selçuk</h4>
                         <p>This web application is done in my free time.</p>
                         <a href="https://t.me/divisia/"><i class="icon telegram"></i></a>
@@ -68,7 +68,7 @@
                 <div class="ui inverted section divider"></div>
                 <img src="" class="ui centered mini image">
                 <div class="ui horizontal inverted small divided link list">
-                    <a class="item" href="#0">Contact</a>
+                    <a class="item" href="#contact">Contact</a>
                     <a class="item" href="#0">Terms and Conditions</a>
                     <a class="item" href="#0">Privacy Policy</a>
                 </div>
