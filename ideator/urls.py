@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from .views import Landing
 
 urlpatterns = [
     path('@/', admin.site.urls),
     path('', include('ideas.urls')),
+    path('', Landing.as_view(), name='landing'),
 ]
 

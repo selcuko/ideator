@@ -1,11 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ doc.title|default:'Titless' }} • Ideator</title>
+
+    <link rel="stylesheet" href="{% static 'semantic/semantic.css' %}">
+    {% block css %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <script defer src="{% static 'semantic/semantic.js' %}"></script>
+    {% block js %}{% endblock %}
 </head>
+
 <body>
+    <!-- Following Menu -->
+    <div class="ui large top fixed hidden menu">
+        <div class="ui container">
+            <a class="active item">Home</a>
+            <a class="item">Ideas</a>
+            <a class="item">About</a>
+            <a class="item">Contact</a>
+            <div class="right menu">
+                <div class="item">
+                    <a href="{% url 'ideas:idea-list' %}" class="ui button">Browse ideas</a>
+                </div>
+                <div class="item">
+                    <a class="ui primary button">Submit your idea</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu">
+        <a class="active item">Home</a>
+        <a class="item">Ideas</a>
+        <a class="item">About</a>
+        <a class="item">Contact</a>
+        <a href="{% url 'ideas:idea-list' %}" class="item">Browse ideas</a>
+        <a class="item">Submit your idea</a>
+    </div>
+
     {% block body %}{% endblock %}
 </body>
+
 </html>
