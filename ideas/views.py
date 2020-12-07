@@ -24,7 +24,7 @@ class IdeaDetail(DetailView):
         if not self.request.session.session_key: 
             self.request.session.save()
         ctx = super().get_context_data(*args, **kwargs)
-        ctx['authorized'] = (self.request.session.session_key == self.object.session_key) and not bool(self.request.session.session_key)
+        ctx['authorized'] = (self.request.session.session_key == self.object.session_key)
         return ctx
 
 
