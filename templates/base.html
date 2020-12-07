@@ -8,6 +8,7 @@
     <title>{{ doc.title|default:'Titless' }} • Ideator</title>
 
     <link rel="stylesheet" href="{% static 'semantic/semantic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
     {% block css %}{% endblock %}
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -18,35 +19,101 @@
 </head>
 
 <body>
-    <!-- Following Menu -->
-    <div class="ui large top fixed hidden menu">
-        <div class="ui container">
-            <a class="active item">Home</a>
-            <a class="item">Ideas</a>
-            <a class="item">About</a>
-            <a class="item">Contact</a>
-            <div class="right menu">
-                <div class="item">
-                    <a href="{% url 'ideas:idea-list' %}" class="ui button">Browse ideas</a>
+
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu">
+        <a href="{% url 'landing' %}" class="{% if active == 'home' %}active {% endif %}item">Home</a>
+        <a href="{% url 'ideas:idea-list' %}" class="{% if active == 'ideas' %}active {% endif %}item">Ideas</a>
+        <a class="{% if active == 'about' %}active {% endif %}item">About</a>
+        <a class="{% if active == 'contact' %}active {% endif %}item">Contact</a>
+        <a class="item">Submit your idea <i class="arrow right icon"></i></a>
+    </div>
+    <div class="pusher">
+        {% block navbar %}
+        <div class="ui inverted vertical center aligned segment">
+            <div class="ui container">
+                <div class="ui large secondary inverted pointing menu">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i>
+                    </a>
+                    <a href="{% url 'landing' %}" class="{% if active == 'home' %}active {% endif %}item">Home</a>
+                    <a href="{% url 'ideas:idea-list' %}"
+                        class="{% if active == 'ideas' %}active {% endif %}item">Ideas</a>
+                    <a class="{% if active == 'about' %}active {% endif %}item">About</a>
+                    <a class="{% if active == 'contact' %}active {% endif %}item">Contact</a>
                 </div>
-                <div class="item">
-                    <a class="ui primary button">Submit your idea</a>
+            </div>
+        </div>
+        {% endblock %}
+        {% block body %}{% endblock %}
+        <div class="ui inverted vertical footer segment">
+            <div class="ui center aligned container">
+                <div class="ui stackable inverted divided grid">
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">Group 1</h4>
+                        <div class="ui inverted link list">
+                            <a href="#" class="item">Link One</a>
+                            <a href="#" class="item">Link Two</a>
+                            <a href="#" class="item">Link Three</a>
+                            <a href="#" class="item">Link Four</a>
+                        </div>
+                    </div>
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">Group 2</h4>
+                        <div class="ui inverted link list">
+                            <a href="#" class="item">Link One</a>
+                            <a href="#" class="item">Link Two</a>
+                            <a href="#" class="item">Link Three</a>
+                            <a href="#" class="item">Link Four</a>
+                        </div>
+                    </div>
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">Group 3</h4>
+                        <div class="ui inverted link list">
+                            <a href="#" class="item">Link One</a>
+                            <a href="#" class="item">Link Two</a>
+                            <a href="#" class="item">Link Three</a>
+                            <a href="#" class="item">Link Four</a>
+                        </div>
+                    </div>
+                    <div class="seven wide column">
+                        <h4 class="ui inverted header">Footer Header</h4>
+                        <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                    </div>
+                </div>
+                <div class="ui inverted section divider"></div>
+                <img src="" class="ui centered mini image">
+                <div class="ui horizontal inverted small divided link list">
+                    <a class="item" href="#">Site Map</a>
+                    <a class="item" href="#">Contact Us</a>
+                    <a class="item" href="#">Terms and Conditions</a>
+                    <a class="item" href="#">Privacy Policy</a>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document)
+            .ready(function () {
 
-    <!-- Sidebar Menu -->
-    <div class="ui vertical inverted sidebar menu">
-        <a class="active item">Home</a>
-        <a class="item">Ideas</a>
-        <a class="item">About</a>
-        <a class="item">Contact</a>
-        <a href="{% url 'ideas:idea-list' %}" class="item">Browse ideas</a>
-        <a class="item">Submit your idea</a>
-    </div>
+                // fix menu when passed
+                $('.masthead')
+                    .visibility({
+                        once: false,
+                        onBottomPassed: function () {
+                            $('.fixed.menu').transition('fade in');
+                        },
+                        onBottomPassedReverse: function () {
+                            $('.fixed.menu').transition('fade out');
+                        }
+                    });
 
-    {% block body %}{% endblock %}
+                // create sidebar and attach to menu open
+                $('.ui.sidebar')
+                    .sidebar('attach events', '.toc.item');
+
+            });
+    </script>
 </body>
 
 </html>
