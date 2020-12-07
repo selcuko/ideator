@@ -1,9 +1,17 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, reverse, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import View
+from ideas.forms import IdeaInlineForm
 
 
 class Landing(View):
     def get(self, request):
-        return render(request, 'landing.html')
+        return render(request, 'landing.html', {'form': IdeaInlineForm()})
+
+    def post(self, request):
+        form = IdeaInlineForm(request.POST)
+        if not form.is_valid():
+            return HttpResponse(form.errors, status=400)
+        idea = form.save()
+        return HttpResponseRedirect(redirect_to=reverse('ideas:idea-detail', kwargs={'slug': idea.slug}))

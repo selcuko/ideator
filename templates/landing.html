@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block css %}
-{% endblock css %}
+{% load static widget_tweaks %}
+{% block js %}
+<script defer src="{% static 'js/landing.js' %}"></script>
+{% endblock %}
 {% block navbar %}<!-- overwrite -->{% endblock %}
 {% block body %}
 
@@ -25,10 +26,14 @@
             <strong>Ideator 3000</strong>
         </h1>
         <div class="ui center aligned basic segment">
-            <div class="ui large action input">
-                <input type="text" placeholder="{{ placeholder|default:'Your million dollar idea' }}">
-                <div class="ui inverted white submit button">Submit</div>
-            </div>
+            <form action="" method="POST" id="idea-form">
+                {% csrf_token %}
+                <div class="ui large action input">
+                    {% firstof placeholder 'Your million dollar idea' as ph %}
+                    {% render_field form.title placeholder=ph %}
+                    <button class="ui inverted white submit button">Submit</button>
+                </div>
+            </form>
             <div class="ui horizontal inverted divider">
                 Or
             </div>
