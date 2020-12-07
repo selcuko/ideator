@@ -1,4 +1,5 @@
 $ideaForm = document.getElementById('idea-form');
+$message = document.getElementById('message');
 $ideaForm.onsubmit = (e) => {
     e.preventDefault();
     const fd = new FormData($ideaForm);
@@ -10,6 +11,8 @@ $ideaForm.onsubmit = (e) => {
         else {
             input = document.getElementById('idea-submit');
             input.classList.add('error');
+            $message.classList.add('negative');
+            $message.style.display = 'block';
         }
     })
 }
